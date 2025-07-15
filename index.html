@@ -4,20 +4,28 @@
   <meta charset="UTF-8">
   <title>INDOREP NET - SOP Warnet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <style>
+    body { font-family: sans-serif; max-width: 900px; margin: 40px auto; line-height: 1.6; }
+    img { max-width: 100%; }
+    pre, code { background: #f4f4f4; padding: 4px 6px; border-radius: 4px; }
+  </style>
 </head>
 <body>
-  <div id="app">Loading SOP...</div>
+  <h1>INDOREP NET - SOP Warnet</h1>
+  <div id="content">Loading SOP...</div>
+
+  <!-- Load Marked.js to render markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    window.$docsify = {
-      name: 'INDOREP NET',
-      repo: '',
-      loadSidebar: true,
-      loadNavbar: true,
-      themeColor: '#007acc',
-      subMaxLevel: 3,
-      homepage: 'README.md'
-    }
+    fetch('SOP.md')
+      .then(response => response.text())
+      .then(md => {
+        document.getElementById('content').innerHTML = marked.parse(md);
+      })
+      .catch(error => {
+        document.getElementById('content').innerHTML = '❌ Failed to load SOP.md';
+        console.error(error);
+      });
   </script>
 </body>
 </html>
